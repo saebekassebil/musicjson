@@ -10,6 +10,7 @@ This is a Node.js commandline application which takes in either MusicJSON or Mus
 them into the counterpart.
 
 `node musicjson` yields:
+
     Subito MusicJSON Converter
     
     Usage:
