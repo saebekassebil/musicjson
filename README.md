@@ -1,19 +1,46 @@
-# Subito MusicJSON
+# musicjson
 
-Subito MusicJSON is a part of the Subito project.
-MusicJSON is simply an MusicXML document transformed to a JSON document. 
-This saves some bytes and is generally easier to manipulate for a JavaScript application.
+MusicXML to MusicJSON bi-directional converter
+Translates MusicXML to MusicJSON format and back again!
 
-Subito MusicJSON will probably be re-wrote into a NPM package, 
-but right now it only consists of a file called `musicjson.js`. 
-This is a Node.js commandline application which takes in either MusicJSON or MusicXML documents and transform
-them into the counterpart.
+## Getting Started
+Install the module with: `npm install musicjson`
 
-`node musicjson` yields:
+## Examples
+```javascript
+var converter = require('musicjson');
 
-    Subito MusicJSON Converter
-    
-    Usage:
-            --json [filename] Converts the source from MusicXML to MusicJSON
-            --xml  [filename] Converts the source from MusicJSON to MusicXML
-            --help            Prints out this help text
+converter.musicJSON(musicXMLSource, function(err, data) {
+  // Do something with the MusicJSON data
+});
+
+converter.musicXML(musicJSONSource, function(err, data) {
+  // Do something with the MusicXML data
+});
+```
+
+## Command line tool
+
+```
+$ musicjson --help
+
+  Usage: musicjson.js <file> [options]
+
+  Options:
+
+  -h, --help              output usage information
+  -V, --version           output the version number
+  -j, --json [output]     Converts the file to MusicJSON
+  -x, --xml [output]      Converts the file to MusicXML
+  -i, --indent [level=2]  Indents the converted source nicely
+
+```
+
+## Contributing
+Feel free to submit any issues regarding this library's bugs and please feel
+also free to submit any feature requests!
+
+## License
+Copyright (c) 2012 Saebekassebil  
+Licensed under the MIT license.
+
