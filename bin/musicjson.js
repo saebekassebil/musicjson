@@ -16,21 +16,21 @@ var fs        = require('fs'),
     MusicJSON = require('../lib/musicjson.js'),
     source, output, converted, indent;
 
-function formatXML(str) {
-  function spaces(length) {
-    var s = '', x;
-    length = length * 2;
+function times(string, times) {
+  var s = '', x;
 
-    for (x = 0; x < length; x++) {
-      s += ' ';
-    }
-
-    return s;
+  for (x = 0; x < times; x++) {
+    s += string;
   }
 
+  return s;
+}
+
+function formatXML(str, indentlvl) {
   str = str.replace(/(>)(<)(\/*)/g, '$1\n$2$3');
+
   var xml = '', pad = 0, i, length, indent, node,
-      lines = str.split('\n');
+      lines = str.split('\n'), indentlvl = indentlvl || 2;
 
   for (i = 0, length = lines.length; i < length; i++) {
     indent = 0;
@@ -46,7 +46,7 @@ function formatXML(str) {
       indent = 0;
     }
 
-    xml = xml + spaces(pad) + node + '\n';
+    xml = xml + times(' ', pad * indentlvl) + node + '\n';
     pad = pad + indent;
   }
 
@@ -83,7 +83,8 @@ if (program.json) {
 
     if (program.indent) {
       indent = parseInt(program.indent);
-      converted = JSON.stringify(output, null, (!isNaN(indent)) ? indent : 2);
+      indent = (isNaN(indent)) ? 2 : indent;
+      converted = JSON.stringify(output, null, times(' ', indent));
     } else {
       converted = JSON.stringify(output);
     }
@@ -99,7 +100,7 @@ if (program.json) {
         console.log('Wrote succesfully to file');
       });
     } else {
-      console.log(JSON.stringify(output, null, 2));
+      console.log(converted);
     }
   });
 } else if (program.xml) {
