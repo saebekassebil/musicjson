@@ -1,7 +1,7 @@
 {
   "name": "musicjson",
   "description": "MusicXML to MusicJSON bi-directional converter",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/saebekassebil/musicjson",
   "author": {
     "name": "Jakob Miland",
@@ -28,8 +28,9 @@
     "domino": ">=1.0.2",
     "commander": ">=0.6.1"
   },
+  "preferGlobal": true,
   "bin": {
-    "musicjson": "bin/musicjson.js"
+    "musicjson": "./bin/musicjson"
   },
   "keywords": [
     "musicjson",
