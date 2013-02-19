@@ -25,8 +25,9 @@
     "node": ">= 0.6.0"
   },
   "dependencies": {
-    "domino": ">=1.0.2",
-    "commander": ">=0.6.1"
+    "commander": ">=0.6.1",
+    "sax": ">=0.5.0",
+    "domino": ">=1.0.8"
   },
   "preferGlobal": true,
   "bin": {
