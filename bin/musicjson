@@ -89,16 +89,18 @@ if (!source || !(program.json || program.xml)) {
     fail('Invalid MusicJSON source', err);
   }
 
-  MusicJSON.musicXML(source, function(err, output) {
+  MusicJSON.musicXML(source, function(err, root) {
     err && fail('An error occured:', err);
 
-    converted = output.innerHTML;
-
     if (program.indent) {
-      indent = +program.indent || 2;
-      converted = formatXML(output.innerHTML, indent);
+      indent = {
+        pretty: true,
+        indent: times(' ', +program.indent || 2),
+        newline: '\n'
+      }
     }
 
+    converted = root.end(indent);
     console.log(converted);
   });
 }
