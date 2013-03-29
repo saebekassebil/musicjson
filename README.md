@@ -8,13 +8,13 @@ Install the module with: `npm install musicjson`
 
 ## Examples
 ```javascript
-var converter = require('musicjson');
+var music = require('musicjson');
 
-converter.musicJSON(musicXMLSource, function(err, data) {
+music.musicJSON(xml, function(err, json) {
   // Do something with the MusicJSON data
 });
 
-converter.musicXML(musicJSONSource, function(err, data) {
+music.musicXML(json, function(err, xml) {
   // Do something with the MusicXML data
 });
 ```
@@ -24,16 +24,15 @@ converter.musicXML(musicJSONSource, function(err, data) {
 ```
 $ musicjson --help
 
-  Usage: musicjson.js <file> [options]
+  Usage: musicjson [options] <file>
 
   Options:
 
-  -h, --help              output usage information
-  -V, --version           output the version number
-  -j, --json [output]     Converts the file to MusicJSON
-  -x, --xml [output]      Converts the file to MusicXML
-  -i, --indent [level=2]  Indents the converted source nicely
-
+    -h, --help              output usage information
+    -V, --version           output the version number
+    -j, --json              Converts the file to MusicJSON
+    -x, --xml               Converts the file to MusicXML
+    -i, --indent [level=2]  Indents the converted source nicely
 ```
 
 ## Contributing
