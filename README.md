@@ -4,7 +4,7 @@ MusicXML to MusicJSON bi-directional converter
 Translates MusicXML to MusicJSON format and back again!
 
 ## Getting Started
-Install the module with: `npm install musicjson`
+Install the module with: `npm install -g musicjson`
 
 ## Examples
 ```javascript
