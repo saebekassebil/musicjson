@@ -2,7 +2,7 @@
 
 /**
  * Subito MusicJSON Converter
- * 
+ *
  * Usage: musicjson [options] <file>
  *
  *  Options:
@@ -65,6 +65,8 @@ program
   .option('-j, --json', 'Converts the file to MusicJSON')
   .option('-x, --xml', 'Converts the file to MusicXML')
   .option('-i, --indent [level=2]', 'Indents the converted source nicely')
+  .option('-o, --order [preserve=true]',
+          'If set to false, tag order is not preserved')
   .parse(process.argv);
 
 source = program.args[0];
@@ -74,7 +76,12 @@ if (!source || !(program.json || program.xml)) {
 } else if (program.json) {
   source = fs.readFileSync(source, 'utf8');
 
-  MusicJSON.musicJSON(source, function(err, output) {
+  var preserve = 'order' in program ? program.order === 'true' : true;
+
+  MusicJSON.musicJSON({
+    source: source,
+    preserveOrder: preserve
+  }, function(err, output) {
     err && fail('An error occured:', err);
 
     indent = (program.indent) ? (+program.indent || 2) : 0;
