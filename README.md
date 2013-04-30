@@ -28,11 +28,12 @@ $ musicjson --help
 
   Options:
 
-    -h, --help              output usage information
-    -V, --version           output the version number
-    -j, --json              Converts the file to MusicJSON
-    -x, --xml               Converts the file to MusicXML
-    -i, --indent [level=2]  Indents the converted source nicely
+    -h, --help                   output usage information
+    -V, --version                output the version number
+    -j, --json                   Converts the file to MusicJSON
+    -x, --xml                    Converts the file to MusicXML
+    -i, --indent [level=2]       Indents the converted source nicely
+    -o, --order [preserve=true]  If set to false, tag order is not preserved
 ```
 
 ## Contributing
