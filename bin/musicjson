@@ -17,7 +17,7 @@
 var fs        = require('fs')
   , program   = require('commander')
   , pkg       = require('../package.json')
-  , MusicJSON = require('../lib/musicjson.js')
+  , MusicJSON = require('../index.js')
   , source, converted, indent;
 
 function times(string, times) {

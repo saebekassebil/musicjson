@@ -3,7 +3,7 @@
   "version": "0.1.6",
   "description": "MusicXML to MusicJSON bi-directional converter",
   "homepage": "https://github.com/saebekassebil/musicjson",
-  "main": "lib/musicjson.js",
+  "main": "index.js",
   "dependencies": {
     "commander": ">=1.1.0",
     "sax": ">=0.5.0",
