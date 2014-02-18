@@ -20,20 +20,28 @@ music.musicXML(json, function(err, xml) {
 ```
 
 ## Command line tool
+The `musicjson` tool can read files from filepaths, but defaults to `stdin`.
+This makes it possible to compose commandline-chains with `musicjson` conversion
+in the middle
 
 ```
 $ musicjson --help
 
   Usage: musicjson [options] <file>
+  If no <file> is given, default to stdin
 
   Options:
 
     -h, --help                   output usage information
     -V, --version                output the version number
-    -j, --json                   Converts the file to MusicJSON
-    -x, --xml                    Converts the file to MusicXML
-    -i, --indent [level=2]       Indents the converted source nicely
-    -o, --order [preserve=true]  If set to false, tag order is not preserved
+    -j, --json                   convert file to MusicJSON
+    -x, --xml                    convert file to MusicXML
+    -i, --indent [level=2]       indent the output nicely
+    -o, --order [preserve=true]  should we preserve tag order?
+
+$ cat autumn_in_new_york.xml | musicjson -j -i > autumn.json
+$ musicjson -o false -j jade.xml > jade.json
+$ musicjson -x jade.json > jade-unordered.xml
 ```
 
 ## Contributing
