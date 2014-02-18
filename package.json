@@ -1,33 +1,17 @@
 {
   "name": "musicjson",
-  "description": "MusicXML to MusicJSON bi-directional converter",
   "version": "0.1.6",
+  "description": "MusicXML to MusicJSON bi-directional converter",
   "homepage": "https://github.com/saebekassebil/musicjson",
-  "author": {
-    "name": "Jakob Miland",
-    "email": "saebekassebil@gmail.com"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/saebekassebil/musicjson.git"
-  },
-  "bugs": {
-    "url": "https://github.com/saebekassebil/musicjson/issues"
-  },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/saebekassebil/musicjson/blob/master/LICENSE"
-    }
-  ],
-  "main": "lib/musicjson",
-  "engines": {
-    "node": ">= 0.6.0"
-  },
+  "main": "lib/musicjson.js",
   "dependencies": {
     "commander": ">=1.1.0",
     "sax": ">=0.5.0",
     "xmlbuilder": ">=0.4.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/saebekassebil/musicjson.git"
   },
   "preferGlobal": true,
   "bin": {
@@ -39,6 +23,12 @@
     "music",
     "converter",
     "translater"
-  ]
+  ],
+  "author": {
+    "name": "Jakob Miland",
+    "email": "saebekassebil@gmail.com",
+    "url": "http://saebekassebil.me"
+  },
+  "license": "MIT"
 }
 
