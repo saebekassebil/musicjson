@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 
 /**
- * Subito MusicJSON Converter
- *
  * Usage: musicjson [options] <file>
+ * If no <file> is given, default to stdin
  *
- *  Options:
+ * Options:
  *
- *    -h, --help              output usage information
- *    -V, --version           output the version number
- *    -j, --json              Converts the file to MusicJSON
- *    -x, --xml               Converts the file to MusicXML
- *    -i, --indent [level=2]  Indents the converted source nicely
+ *   -h, --help                   output usage information
+ *   -V, --version                output the version number
+ *   -j, --json                   convert file to MusicJSON
+ *   -x, --xml                    convert file to MusicXML
+ *   -i, --indent [level=2]       indent the output nicely
+ *   -o, --order [preserve=true]  should we preserve tag order?
  */
 
 var fs        = require('fs')
@@ -61,12 +61,11 @@ function fail(message, err) {
 // Command line interface
 program
   .version(pkg.version)
-  .usage('[options] <file>')
-  .option('-j, --json', 'Converts the file to MusicJSON')
-  .option('-x, --xml', 'Converts the file to MusicXML')
-  .option('-i, --indent [level=2]', 'Indents the converted source nicely')
-  .option('-o, --order [preserve=true]',
-          'If set to false, tag order is not preserved')
+  .usage('[options] <file>\n  If no <file> is given, default to stdin')
+  .option('-j, --json', 'convert file to MusicJSON')
+  .option('-x, --xml', 'convert file to MusicXML')
+  .option('-i, --indent [level=2]', 'indent the output nicely')
+  .option('-o, --order [preserve=true]', 'should we preserve tag order?')
   .parse(process.argv);
 
 source = program.args[0];
