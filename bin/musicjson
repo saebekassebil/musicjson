@@ -18,7 +18,7 @@ var fs        = require('fs')
   , program   = require('commander')
   , pkg       = require('../package.json')
   , MusicJSON = require('../index.js')
-  , source, converted, indent;
+  , source, preserve, indent, converted;
 
 function times(string, times) {
   return Array(times + 1).join(string);
@@ -70,45 +70,63 @@ program
   .parse(process.argv);
 
 source = program.args[0];
+preserve = program.order !== 'false';
 
-if (!source || !(program.json || program.xml)) {
-  program.help();
-} else if (program.json) {
-  source = fs.readFileSync(source, 'utf8');
+function input(file, cb) {
+  var stream = file ? fs.createReadStream(file) : process.stdin;
+  var buffered = '';
+  stream.resume();
+  stream.setEncoding('utf8');
 
-  var preserve = 'order' in program ? program.order === 'true' : true;
-
-  MusicJSON.musicJSON({
-    source: source,
-    preserveOrder: preserve
-  }, function(err, output) {
-    err && fail('An error occured:', err);
-
-    indent = (program.indent) ? (+program.indent || 2) : 0;
-    converted = JSON.stringify(output, null, times(' ', indent));
-
-    console.log(converted);
+  stream.on('data', function(chunk) {
+    buffered += chunk;
   });
+
+  stream.on('error', function(e) {
+    cb(e);
+  });
+
+  stream.on('end', function() {
+    cb(null, buffered);
+  });
+}
+
+if (!program.json && !program.xml) {
+  program.help();
 } else {
-  try {
-    source = JSON.parse(fs.readFileSync(source, 'utf8'));
-  } catch(err) {
-    fail('Invalid MusicJSON source', err);
-  }
+  input(source, function(err, data) {
+    err && fail('Failed to read from source', err);
+    if (program.json) {
+      MusicJSON.musicJSON({ source: data, preserveOrder: preserve },
+      function(err, output) {
+        err && fail('An error occured converting to MusicJSON:', err);
 
-  MusicJSON.musicXML(source, function(err, root) {
-    err && fail('An error occured:', err);
-
-    if (program.indent) {
-      indent = {
-        pretty: true,
-        indent: times(' ', +program.indent || 2),
-        newline: '\n'
+        indent = 'indent' in program ? (+program.indent || 2) : 0;
+        converted = JSON.stringify(output, null, times(' ', indent));
+        console.log(converted);
+      });
+    } else {
+      try {
+        data = JSON.parse(data);
+      } catch(err) {
+        fail('Invalid MusicJSON source', err);
       }
-    }
 
-    converted = root.end(indent);
-    console.log(converted);
+      MusicJSON.musicXML(data, function(err, root) {
+        err && fail('An error occured converting to MusicXML:', err);
+
+        if (program.indent) {
+          indent = {
+            pretty: true,
+            indent: times(' ', +program.indent || 2),
+            newline: '\n'
+          }
+        }
+
+        converted = root.end(indent);
+        console.log(converted);
+      });
+    }
   });
 }
 
