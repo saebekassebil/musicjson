@@ -1,6 +1,6 @@
 {
   "name": "musicjson",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "MusicXML to MusicJSON bi-directional converter",
   "homepage": "https://github.com/saebekassebil/musicjson",
   "main": "index.js",
